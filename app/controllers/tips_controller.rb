@@ -5,11 +5,11 @@ class TipsController < ApplicationController
   end
 
   def show
-    render json: Tip.find(params[:id])
+    render json: Tip.find(params[:id]).to_h
   end
 
   def create
-    @tip = Tip.save(tip_params)
+    @tip = Tip.create(tip_params)
     render json: @tip.to_h
   end
 

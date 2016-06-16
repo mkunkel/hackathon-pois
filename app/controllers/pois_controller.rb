@@ -5,11 +5,11 @@ class PoisController < ApplicationController
   end
 
   def show
-    render json: Poi.find(params[:id])
+    render json: Poi.find(params[:id]).to_h
   end
 
   def create
-    @poi = Poi.save(poi_params)
+    @poi = Poi.create(poi_params)
     render json: @poi.to_h
   end
 
@@ -17,5 +17,13 @@ class PoisController < ApplicationController
 
   def poi_params
     params.require(:poi).permit(:name, :latitude, :longitude, :address, :luna_id, :category)
+  end
+
+  def limit
+    params[:limit] || 10
+  end
+
+  def offset
+    params[:offset] || 0
   end
 end

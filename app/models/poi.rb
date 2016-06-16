@@ -12,8 +12,8 @@ class Poi < ActiveRecord::Base
         longitude: longitude
       },
       category: category,
-      tips: tips.to_h,
-      images: images.to_h
+      tips: tips.map(&:to_h),
+      images: images.map(&:to_h)
     }
   end
 end

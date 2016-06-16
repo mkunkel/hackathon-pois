@@ -5,11 +5,11 @@ class ImagesController < ApplicationController
   end
 
   def show
-    render json: Image.find(params[:id])
+    render json: Image.find(params[:id]).to_h
   end
 
   def create
-    @image = Image.save(poi_params)
+    @image = Image.create(poi_params)
     render json: @image.to_h
   end
 
