@@ -18,4 +18,12 @@ class ImagesController < ApplicationController
   def poi_params
     params.require(:image).permit(:image, :poi_id, :luna_id)
   end
+
+  def limit
+    params[:limit] || 10
+  end
+
+  def offset
+    params[:offset] || 0
+  end
 end

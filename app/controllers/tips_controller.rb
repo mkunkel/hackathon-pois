@@ -18,4 +18,12 @@ class TipsController < ApplicationController
   def tip_params
     params.require(:tip).permit(:poi_id, :luna_id, :text)
   end
+
+  def limit
+    params[:limit] || 10
+  end
+
+  def offset
+    params[:offset] || 0
+  end
 end
