@@ -13,6 +13,16 @@ class PoisController < ApplicationController
     render json: @poi.to_h
   end
 
+  def update
+    @poi = Poi.find(params[:id]).update(poi_params)
+    render json: @poi.to_hash
+  end
+
+  def destroy
+    Poi.find(params[:id]).destroy
+    render json: {}
+  end
+
   private
 
   def poi_params

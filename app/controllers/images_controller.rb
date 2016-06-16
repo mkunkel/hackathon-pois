@@ -9,13 +9,23 @@ class ImagesController < ApplicationController
   end
 
   def create
-    @image = Image.create(poi_params)
+    @image = Image.create(image_params)
     render json: @image.to_h
+  end
+
+  def update
+    @image = Image.find(params[:id]).update(image_params)
+    render json: @image.to_hash
+  end
+
+  def destroy
+    Image.find(params[:id]).destroy
+    render json: {}
   end
 
   private
 
-  def poi_params
+  def image_params
     params.require(:image).permit(:image, :poi_id, :luna_id)
   end
 

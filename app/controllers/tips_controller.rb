@@ -13,6 +13,16 @@ class TipsController < ApplicationController
     render json: @tip.to_h
   end
 
+  def update
+    @tip = Tip.find(params[:id]).update(tip_params)
+    render json: @poi.to_hash
+  end
+
+  def destroy
+    Tip.find(params[:id]).destroy
+    render json: {}
+  end
+
   private
 
   def tip_params
