@@ -11,9 +11,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160616170000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "images", force: true do |t|
+    t.integer  "poi_id"
+    t.text     "ocr_text"
+    t.string   "luna_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  create_table "pois", force: true do |t|
+    t.decimal  "latitude"
+    t.decimal  "longitude"
+    t.text     "address"
+    t.string   "category"
+    t.string   "luna_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tips", force: true do |t|
+    t.integer  "poi_id"
+    t.text     "text"
+    t.string   "luna_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
