@@ -4,8 +4,8 @@ class ApplicationController < ActionController::Base
   # protect_from_forgery with: :null_session
 
   rescue_from StandardError do |exception|
-    logger.error exception.message
-    exception.backtrace.each { |line| logger.error line }
+    puts exception.message
+    exception.backtrace.each { |line| puts line }
     raise exception
   end
 end
