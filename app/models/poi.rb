@@ -7,6 +7,7 @@ class Poi < ActiveRecord::Base
       id: id,
       luna_id: luna_id,
       name: name,
+      address: address,
       coordinates: {
         latitude: latitude,
         longitude: longitude
