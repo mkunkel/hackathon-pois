@@ -9,8 +9,8 @@ class ApplicationController < ActionController::Base
 
   rescue_from StandardError do |exception|
     puts exception.message
-    exception.backtrace.each { |line| puts line }
-    raise exception
+    exception.backtrace.map { |line| puts line }
+    render json: { error: exception.message, backtrace: exception.backtrace }, status: 500
   end
 
 
