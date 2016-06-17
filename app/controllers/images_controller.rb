@@ -42,7 +42,9 @@ class ImagesController < ApplicationController
     begin
       api_key = ENV['OCR_API_KEY']
       api_url = URI('https://api.ocr.space/parse/image')
-      response = Net::HTTP.post_form(api_url, apikey: api_key, url: @image.image.url)
+      # If there is any information after a ? in a URL, OCRAPI sees the URL as invalid
+      image_url = @image.image.url.split('?').first
+      response = Net::HTTP.post_form(api_url, apikey: api_key, url: image_url)
       @image.ocr_text = JSON.parse(response.body)['ParsedResults'].first['ParsedText']
       @image.save
     rescue StandardError
