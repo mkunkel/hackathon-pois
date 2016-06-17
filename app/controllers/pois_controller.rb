@@ -1,6 +1,6 @@
 class PoisController < ApplicationController
   def index
-    @pois = Poi.limit(limit).offset(offset)
+    @pois = Poi.order(created_at: sort).limit(limit).offset(offset)
     render json: @pois.map(&:to_h)
   end
 

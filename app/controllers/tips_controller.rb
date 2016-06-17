@@ -1,6 +1,6 @@
 class TipsController < ApplicationController
   def index
-    @tips = Tip.limit(limit).offset(offset)
+    @tips = Tip.order(created_at: sort).limit(limit).offset(offset)
     render json: @tips.map(&:to_h)
   end
 

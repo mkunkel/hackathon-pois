@@ -1,6 +1,6 @@
 class ImagesController < ApplicationController
   def index
-    @images = Image.limit(limit).offset(offset)
+    @images = Image.order(created_at: sort).limit(limit).offset(offset)
     render json: @images.map(&:to_h)
   end
 

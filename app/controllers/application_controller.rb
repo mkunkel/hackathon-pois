@@ -23,6 +23,15 @@ class ApplicationController < ActionController::Base
     params[:offset] || 0
   end
 
+  def sort
+    return :desc unless valid_sort_param?
+    params[:sort].to_sym
+  end
+
+  def valid_sort_param?
+    %w(asc desc).include?(params[:sort])
+  end
+
   def cors_set_access_control_headers
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE, OPTIONS'
