@@ -13,6 +13,15 @@ class ApplicationController < ActionController::Base
     render json: { error: exception.message, backtrace: exception.backtrace }, status: 500
   end
 
+  private
+
+  def limit
+    params[:limit] || 10
+  end
+
+  def offset
+    params[:offset] || 0
+  end
 
   def cors_set_access_control_headers
     headers['Access-Control-Allow-Origin'] = '*'

@@ -30,14 +30,6 @@ class ImagesController < ApplicationController
     params.require(:image).permit(:image, :poi_id, :luna_id)
   end
 
-  def limit
-    params[:limit] || 10
-  end
-
-  def offset
-    params[:offset] || 0
-  end
-
   def set_ocr_text
     begin
       api_key = ENV['OCR_API_KEY']

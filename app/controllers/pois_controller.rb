@@ -29,12 +29,4 @@ class PoisController < ApplicationController
     params.require(:poi).permit(:name, :latitude, :longitude,
                                 :address, :luna_id, :category, :city, :state)
   end
-
-  def limit
-    params[:limit] || 10
-  end
-
-  def offset
-    params[:offset] || 0
-  end
 end
