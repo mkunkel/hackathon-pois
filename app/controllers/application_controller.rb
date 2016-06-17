@@ -13,30 +13,7 @@ class ApplicationController < ActionController::Base
     render json: { error: exception.message, backtrace: exception.backtrace }, status: 500
   end
 
-  def index
-    @object = model_class.order(created_at: sort).limit(limit).offset(offset)
-    render json: @object.map(&:to_h)
-  end
-
-  def show
-    render json: model_class.find(params[:id]).to_h
-  end
-
-  def update
-    @object = model_name.find(params[:id]).update(object_params)
-    render json: @object.to_hash
-  end
-
-  def destroy
-    model_class.find(params[:id]).destroy
-    render json: {}
-  end
-
   private
-
-  def model_class
-    controller_name.classify.constantize
-  end
 
   def limit
     params[:limit] || 10
