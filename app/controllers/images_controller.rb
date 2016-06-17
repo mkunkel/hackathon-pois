@@ -10,6 +10,7 @@ class ImagesController < ApplicationController
 
   def create
     @image = Image.create(image_params)
+    set_ocr_text
     render json: @image.to_h
   end
 
@@ -35,5 +36,17 @@ class ImagesController < ApplicationController
 
   def offset
     params[:offset] || 0
+  end
+
+  def set_ocr_text
+    begin
+      api_key = ENV['OCR_API_KEY']
+      api_url = URI('https://api.ocr.space/parse/image')
+      response = Net::HTTP.post_form(api_url, apikey: api_key, url: @image.image.url)
+      @image.ocr_text = JSON.parse(response.body)['ParsedResults'].first['ParsedText']
+      @image.save
+    rescue StandardError
+      nil
+    end
   end
 end
