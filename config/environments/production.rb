@@ -78,6 +78,7 @@ Rails.application.configure do
 
   # Configure paperclip to upload to S3
   config.paperclip_defaults = {
+    default_style: :large,
     storage: :s3,
     s3_credentials: {
       bucket: ENV['S3_BUCKET_NAME'],
